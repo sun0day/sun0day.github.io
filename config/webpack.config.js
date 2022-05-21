@@ -165,6 +165,13 @@ module.exports = function (webpackEnv) {
           sourceMap: isEnvProduction ? shouldUseSourceMap : isEnvDevelopment,
         },
       },
+      {
+        loader: require.resolve('px2rem-loader'),
+        options: {
+          remUnit: 37.5, 
+          remPrecision: 2
+        }
+      }
     ].filter(Boolean);
     if (preProcessor) {
       loaders.push(

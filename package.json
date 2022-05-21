@@ -10,6 +10,7 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.2.0",
     "@testing-library/user-event": "^13.5.0",
+    "antd-mobile": "^5.12.5",
     "babel-jest": "^27.4.2",
     "babel-loader": "^8.2.3",
     "babel-plugin-named-asset-import": "^0.3.8",
@@ -44,6 +45,7 @@
     "react-dev-utils": "^12.0.1",
     "react-dom": "^18.1.0",
     "react-refresh": "^0.11.0",
+    "react-router-dom": "^6.3.0",
     "resolve": "^1.20.0",
     "resolve-url-loader": "^4.0.0",
     "sass-loader": "^12.3.0",
@@ -136,5 +138,9 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "lib-flexible": "^0.3.2",
+    "px2rem-loader": "^0.1.9"
   }
 }
