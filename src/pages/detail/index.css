@@ -1,0 +1,12 @@
+.temp-chart-container {
+  width: 100%;
+  text-align: center;
+  /* overflow-x: scroll; */
+}
+
+#temp-chart {
+  margin: 0 auto;
+  /* display: inline-block; */
+  width: 100%;
+  height: 88px;
+}
