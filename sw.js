@@ -62,13 +62,6 @@ self.addEventListener('install', (event) => {
     addResourcesToCache([
       '/assets/',
       '/assets/index.html',
-      '/assets/style.css',
-      '/assets/app.js',
-      '/assets/image-list.js',
-      '/assets/star-wars-logo.jpg',
-      '/assets/gallery/bountyHunters.jpg',
-      '/assets/gallery/myLittleVader.jpg',
-      '/assets/gallery/snowTroopers.jpg',
     ])
   );
 });
