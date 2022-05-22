@@ -14,7 +14,7 @@ function serviceRegister() {
   }
   window.addEventListener("load", async () => {
     let sw = null;
-    const regisration = await serviceWorker.register("sw.js");
+    const regisration = await serviceWorker.register("/sw.js");
     sw = regisration.installing || regisration.waiting || regisration.active;
     sw && sw.addEventListener("statechange", (e) => {
       const { state } = e.target;
