@@ -62,7 +62,7 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     addResourcesToCache([
       '/assets/',
-      '/assets/index.html',
+      'https://sun0day.github.io/assets/index.html',
     ])
   );
 });
