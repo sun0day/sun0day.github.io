@@ -7,7 +7,7 @@
 - 未来一周天气预报
 - 离线访问功能
 
-应用地址: https://sun0day.github.io/assets/，  建议在 chrome 浏览器控制台 device 模式下浏览。
+应用地址: https://sun0day.github.io/assets/ ，  建议在 chrome 浏览器控制台 device 模式下浏览。
 
 ## 开发
 
