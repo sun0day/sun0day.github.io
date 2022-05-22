@@ -1,17 +1,21 @@
 {
   "files": {
-    "main.css": "/assets/static/css/main.5f50ed74.css",
-    "main.js": "/assets/static/js/main.7c37a3ef.js",
+    "main.css": "/assets/static/css/main.121dd7a2.css",
+    "main.js": "/assets/static/js/main.4fb4731c.js",
     "static/js/787.6189cd07.chunk.js": "/assets/static/js/787.6189cd07.chunk.js",
+    "static/media/day-wind.svg": "/assets/static/media/day-wind.6c4887b497ebe8a8879a185b230c4349.svg",
     "static/media/logo.svg": "/assets/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "static/media/home.svg": "/assets/static/media/home.d1b99a85cb08bb751bbd3644edeac0da.svg",
+    "static/media/wind-speed.svg": "/assets/static/media/wind-speed.e40d081e6c1abeaedcdba0005004f343.svg",
+    "static/media/humidity.svg": "/assets/static/media/humidity.a06c4d0f972b895c9244820ea163b11b.svg",
+    "static/media/precip.svg": "/assets/static/media/precip.0b813e299cc01e66e74b9a416e2223a6.svg",
     "index.html": "/assets/index.html",
-    "main.5f50ed74.css.map": "/assets/static/css/main.5f50ed74.css.map",
-    "main.7c37a3ef.js.map": "/assets/static/js/main.7c37a3ef.js.map",
+    "main.121dd7a2.css.map": "/assets/static/css/main.121dd7a2.css.map",
+    "main.4fb4731c.js.map": "/assets/static/js/main.4fb4731c.js.map",
     "787.6189cd07.chunk.js.map": "/assets/static/js/787.6189cd07.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.5f50ed74.css",
-    "static/js/main.7c37a3ef.js"
+    "static/css/main.121dd7a2.css",
+    "static/js/main.4fb4731c.js"
   ]
 }

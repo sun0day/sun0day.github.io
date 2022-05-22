@@ -24,8 +24,8 @@ function TempChart() {
     grid: {
       left: '-4%',
       right: '-4%',
-      // top: 0,
-      // bottom: '24%',
+      top: 0,
+      bottom: '24%',
     },
     xAxis: {
       type: 'category',
