@@ -9,6 +9,10 @@
 
 应用地址: https://sun0day.github.io/assets/ ，  建议在 chrome 浏览器控制台 device 模式下浏览。
 
+效果图如下：
+
+![](home.png)
+
 ## 开发
 
 ### 前置准备
