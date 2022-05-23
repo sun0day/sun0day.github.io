@@ -8,10 +8,6 @@ const putInCache = async (request, response) => {
   await cache.put(request, response);
 };
 
-const cleanCache = () => {
-  return cache.
-}
-
 const cacheFirst = async ({ request, preloadResponsePromise, fallbackUrl }) => {
   console.log('catch request', request)
 
