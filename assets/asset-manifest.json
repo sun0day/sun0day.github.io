@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/assets/static/css/main.3e27aa1b.css",
-    "main.js": "/assets/static/js/main.b9d5f6cd.js",
+    "main.css": "/assets/static/css/main.4b294089.css",
+    "main.js": "/assets/static/js/main.12eafa1f.js",
     "static/js/787.6189cd07.chunk.js": "/assets/static/js/787.6189cd07.chunk.js",
     "static/media/day-wind.svg": "/assets/static/media/day-wind.6c4887b497ebe8a8879a185b230c4349.svg",
-    "static/media/logo.svg": "/assets/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "static/media/logo.svg": "/assets/static/media/logo.e49816f5bcd3ef958fd03d56fde4d894.svg",
     "static/media/home.svg": "/assets/static/media/home.d1b99a85cb08bb751bbd3644edeac0da.svg",
     "static/media/wind-speed2.svg": "/assets/static/media/wind-speed2.a89f5eb6fc5660dbe5646a1c41a56a74.svg",
     "static/media/wind-speed.svg": "/assets/static/media/wind-speed.e40d081e6c1abeaedcdba0005004f343.svg",
@@ -14,12 +14,12 @@
     "static/media/precip2.svg": "/assets/static/media/precip2.a17146d6a2664d289491c5966ac59c35.svg",
     "index.html": "/assets/index.html",
     "static/media/left-arrow.svg": "/assets/static/media/left-arrow.f158b891b8aadabd69e1b7a6372d3119.svg",
-    "main.3e27aa1b.css.map": "/assets/static/css/main.3e27aa1b.css.map",
-    "main.b9d5f6cd.js.map": "/assets/static/js/main.b9d5f6cd.js.map",
+    "main.4b294089.css.map": "/assets/static/css/main.4b294089.css.map",
+    "main.12eafa1f.js.map": "/assets/static/js/main.12eafa1f.js.map",
     "787.6189cd07.chunk.js.map": "/assets/static/js/787.6189cd07.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.3e27aa1b.css",
-    "static/js/main.b9d5f6cd.js"
+    "static/css/main.4b294089.css",
+    "static/js/main.12eafa1f.js"
   ]
 }
