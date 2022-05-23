@@ -1,9 +1,21 @@
 {
   "files": {
-    "main.css": "/assets/static/css/main.4b294089.css",
-    "main.js": "/assets/static/js/main.12eafa1f.js",
+    "main.css": "/assets/static/css/main.079885e7.css",
+    "main.js": "/assets/static/js/main.764d9e5a.js",
     "static/js/787.6189cd07.chunk.js": "/assets/static/js/787.6189cd07.chunk.js",
+    "static/media/day-snow.svg": "/assets/static/media/day-snow.4a476f10c8ad1f897cdb499544cc7b2c.svg",
     "static/media/day-wind.svg": "/assets/static/media/day-wind.6c4887b497ebe8a8879a185b230c4349.svg",
+    "static/media/day-rain.svg": "/assets/static/media/day-rain.e05ac1f0396f8be669121a210dfbf201.svg",
+    "static/media/day-sun.svg": "/assets/static/media/day-sun.0e0a8e62946531bb931931ae6e55e08b.svg",
+    "static/media/day-storm.svg": "/assets/static/media/day-storm.62e0e926920e196d20d261660e4f9979.svg",
+    "static/media/day-cloud.svg": "/assets/static/media/day-cloud.b3adcd48e56f54fde430a5f668eb99b2.svg",
+    "static/media/night-snow.svg": "/assets/static/media/night-snow.da8214d15d16c1e44a057807e24b1efa.svg",
+    "static/media/night-storm.svg": "/assets/static/media/night-storm.ecf8ea494f6c7712989dbb3764cf4675.svg",
+    "static/media/night-wind.svg": "/assets/static/media/night-wind.3ebb5b0ef7f27982ddab7851526d0c6a.svg",
+    "static/media/night-rain.svg": "/assets/static/media/night-rain.f8a72a8e39d2b140693d363ffb1dbc07.svg",
+    "static/media/night-cloud.svg": "/assets/static/media/night-cloud.2da330d0bb4c8b65078a5019833c55d3.svg",
+    "static/media/night-moon.svg": "/assets/static/media/night-moon.5fe3d9560f29ff9fbbbbed6503ac3bed.svg",
+    "static/media/rain.svg": "/assets/static/media/rain.a1d2e4124683fe11fdf2d5a729911416.svg",
     "static/media/logo.svg": "/assets/static/media/logo.e49816f5bcd3ef958fd03d56fde4d894.svg",
     "static/media/home.svg": "/assets/static/media/home.d1b99a85cb08bb751bbd3644edeac0da.svg",
     "static/media/wind-speed2.svg": "/assets/static/media/wind-speed2.a89f5eb6fc5660dbe5646a1c41a56a74.svg",
@@ -14,12 +26,12 @@
     "static/media/precip2.svg": "/assets/static/media/precip2.a17146d6a2664d289491c5966ac59c35.svg",
     "index.html": "/assets/index.html",
     "static/media/left-arrow.svg": "/assets/static/media/left-arrow.f158b891b8aadabd69e1b7a6372d3119.svg",
-    "main.4b294089.css.map": "/assets/static/css/main.4b294089.css.map",
-    "main.12eafa1f.js.map": "/assets/static/js/main.12eafa1f.js.map",
+    "main.079885e7.css.map": "/assets/static/css/main.079885e7.css.map",
+    "main.764d9e5a.js.map": "/assets/static/js/main.764d9e5a.js.map",
     "787.6189cd07.chunk.js.map": "/assets/static/js/787.6189cd07.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.4b294089.css",
-    "static/js/main.12eafa1f.js"
+    "static/css/main.079885e7.css",
+    "static/js/main.764d9e5a.js"
   ]
 }

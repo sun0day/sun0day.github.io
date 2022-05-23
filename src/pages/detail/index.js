@@ -5,38 +5,39 @@ import leftArrow from '../../assets/left-arrow.svg'
 import precip from '../../assets/precip2.svg'
 import windSpeed from '../../assets/wind-speed2.svg'
 import humidity from '../../assets/humidity2.svg'
-import { getWeatherLogo } from '../../utils/weather';
-import {getDayZh} from '../../utils/date'
+import rain from '../../assets/rain.svg'
+import { getWeather24h, getWeather7d, getWeatherLogo, getWeatherNow } from '../../utils/weather';
+import { getDayZh, getHour } from '../../utils/date'
 import './index.css';
 
 function Detail() {
-
+  const data = getWeatherNow()
   return (
     <div className="detail-container">
       <header>
         <Link to='/'><img src={leftArrow} /></Link>
-        <img src={getWeatherLogo()} />
+        <img src={getWeatherLogo(data.text)} />
       </header>
 
       <div>
         <div className='location'>杭州市,</div>
         <div className='location'>浙江省</div>
 
-        <div className='temp'>13</div>
+        <div className='temp'>{data.temp}</div>
       </div>
 
       <div className='weather-index-list'>
         <div className='weather-index precip'>
           <img src={precip} />
-          <span>6%</span>
+          <span>{parseInt(data.precip)}%</span>
         </div>
         <div className='weather-index humidity'>
           <img src={humidity} />
-          <span>90%</span>
+          <span>{parseInt(data.humidity)}%</span>
         </div>
         <div className='weather-index wind-speed'>
           <img src={windSpeed} />
-          <span>19km/h</span>
+          <span>{parseInt(data.windSpeed)}km/h</span>
         </div>
       </div>
 
@@ -50,11 +51,9 @@ function Detail() {
 
 // 温度折线图
 function TempChart() {
+  const data = getWeather24h()
   const [inst, setInst] = useState(null)
   const [option, setOption] = useState({
-    // title: {
-    //   text: 'Today'
-    // },
     grid: {
       left: '-4%',
       right: '-4%',
@@ -95,7 +94,7 @@ function TempChart() {
         name: 'weather temp',
         type: 'line',
         showSymbol: false,
-        data: new Array(6).fill(0).map((x, i) => [i + 'am', Math.random() * 50]),
+        data: Object.keys(data).slice(0, 4).map((k, i) => [getHour(data[k].update_time), +data[k].degree]),
         itemStyle: {
           color: '#E9C939'
         },
@@ -124,118 +123,27 @@ function TempChart() {
 
 
 function HourList() {
+  const data = getWeather24h()
   return (<div className='hour-list'>{
-    [{ temp: 20, time: '10am' },
-    { temp: 30, time: '11am' },
-    { temp: 20, time: '10am' },
-    { temp: 30, time: '11am' },{ temp: 20, time: '10am' },
-    { temp: 30, time: '11am' },
-    { temp: 20, time: '10am' },
-    { temp: 30, time: '11am' }].map(w => (
-      <div className='hour-block' key={w.time}>
-        <div className='temp'>{w.temp}</div>
-        <div className='time'>{w.time}</div>
+    Object.keys(data).slice(0, 25).map(k => (
+      <div className='hour-block' key={data[k].update_time}>
+        <div className='temp'>{data[k].degree}</div>
+        <div className='time'>{getHour(data[k].update_time)}</div>
       </div>
     ))
   }</div>)
 }
 
 function DayList() {
+  const data = getWeather7d()
   return (<div className='week-list'>{
-    [{
-      "fxDate": "2021-11-15",
-      "sunrise": "06:58",
-      "sunset": "16:59",
-      "moonrise": "15:16",
-      "moonset": "03:40",
-      "moonPhase": "盈凸月",
-      "moonPhaseIcon": "803",
-      "tempMax": "12",
-      "tempMin": "-1",
-      "iconDay": "101",
-      "textDay": "多云",
-      "iconNight": "150",
-      "textNight": "晴",
-      "wind360Day": "45",
-      "windDirDay": "东北风",
-      "windScaleDay": "1-2",
-      "windSpeedDay": "3",
-      "wind360Night": "0",
-      "windDirNight": "北风",
-      "windScaleNight": "1-2",
-      "windSpeedNight": "3",
-      "humidity": "65",
-      "precip": "0.0",
-      "pressure": "1020",
-      "vis": "25",
-      "cloud": "4",
-      "uvIndex": "3"
-    },
-    {
-      "fxDate": "2021-11-16",
-      "sunrise": "07:00",
-      "sunset": "16:58",
-      "moonrise": "15:38",
-      "moonset": "04:40",
-      "moonPhase": "盈凸月",
-      "moonPhaseIcon": "803",
-      "tempMax": "13",
-      "tempMin": "0",
-      "iconDay": "100",
-      "textDay": "晴",
-      "iconNight": "101",
-      "textNight": "多云",
-      "wind360Day": "225",
-      "windDirDay": "西南风",
-      "windScaleDay": "1-2",
-      "windSpeedDay": "3",
-      "wind360Night": "225",
-      "windDirNight": "西南风",
-      "windScaleNight": "1-2",
-      "windSpeedNight": "3",
-      "humidity": "74",
-      "precip": "0.0",
-      "pressure": "1016",
-      "vis": "25",
-      "cloud": "1",
-      "uvIndex": "3"
-    },
-    {
-      "fxDate": "2021-11-17",
-      "sunrise": "07:01",
-      "sunset": "16:57",
-      "moonrise": "16:01",
-      "moonset": "05:41",
-      "moonPhase": "盈凸月",
-      "moonPhaseIcon": "803",
-      "tempMax": "13",
-      "tempMin": "0",
-      "iconDay": "100",
-      "textDay": "晴",
-      "iconNight": "150",
-      "textNight": "晴",
-      "wind360Day": "225",
-      "windDirDay": "西南风",
-      "windScaleDay": "1-2",
-      "windSpeedDay": "3",
-      "wind360Night": "225",
-      "windDirNight": "西南风",
-      "windScaleNight": "1-2",
-      "windSpeedNight": "3",
-      "humidity": "56",
-      "precip": "0.0",
-      "pressure": "1009",
-      "vis": "25",
-      "cloud": "0",
-      "uvIndex": "3"
-    }
-  ].map(w => (
-      <div className='week-block' key={w.fxDate}>
-        <div className='time'>{getDayZh(w.fxDate)}</div>
-        <div className='text'>{w.textDay}</div>
+    Object.keys(data).slice(1, 8).map(k => (
+      <div className='week-block' key={data[k].time}>
+        <div className='time'>{getDayZh(data[k].time)}</div>
+        <img src={rain} className='text'/>
         <div className='temp-list'>
-          <span className='max-temp'>{w.tempMax}</span>
-          <span className='min-temp'>{w.tempMin}</span>
+          <span className='max-temp'>{data[k].max_degree}</span>
+          <span className='min-temp'>{data[k].min_degree}</span>
         </div>
       </div>
     ))

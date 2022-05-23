@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
-import { getWeatherLogo } from '../../utils/weather'
+import { getWeatherLogo, getWeatherNow } from '../../utils/weather'
+import { getDayZh, getHour } from '../../utils/date'
 import logo from '../../assets/logo.svg'
 import home from '../../assets/home.svg'
 import precip from '../../assets/precip.svg'
@@ -25,25 +26,27 @@ function Home() {
 
 // 天气概览
 function OverviewPanel() {
+  const data = getWeatherNow()
+
   return (
     <div className="overview-panel">
-      <img src={getWeatherLogo()} />
+      <img src={getWeatherLogo(data.text)} />
       <strong className='location'>杭州市,浙江省</strong>
       <div>
         <div>
-          <strong className='temp'>15</strong>
+          <strong className='temp'>{data.temp}</strong>
           <div className='time'>
             <span className='time-zh'>
-              周日,
+              {getDayZh()},
             </span>
             <span className='time-en'>
-              11 am
+              {getHour()}
             </span>
           </div>
         </div>
         <div className='weather-tag-list'>
-          <div className='weather-tag wind'>强风</div>
-          <div className='weather-tag cloud'>多云</div>
+          <div className='weather-tag wind'>{data.windDir}</div>
+          <div className='weather-tag cloud'>{data.text}</div>
         </div>
       </div>
 
@@ -58,19 +61,20 @@ function OverviewPanel() {
 
 // 天气详情指标
 function IndexPanel() {
+  const data = getWeatherNow()
   return (
     <div className='index-panel'>
       <div>
         <div><img src={precip} /> <span>降水量</span></div>
-        <span>6%</span>
+        <span>{parseInt(data.precip)}%</span>
       </div>
       <div>
         <div><img src={humidity} /> <span>湿度</span></div>
-        <span>90%</span>
+        <span>{parseInt(data.humidity)}%</span>
       </div>
       <div>
         <div><img src={windSpeed} /> <span>风速</span></div>
-        <span>17km/h</span>
+        <span>{parseInt(data.windSpeed)}km/h</span>
       </div>
     </div>
   )

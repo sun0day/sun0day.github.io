@@ -49,3 +49,4 @@
 
 - safari 端无法渲染部分 svg
 - 描述天气温度变化的 echarts 折线图无法很好自适应所有移动端
+- service-worker 更新问题
