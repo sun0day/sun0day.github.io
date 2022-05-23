@@ -14,13 +14,14 @@ const cleanCache = () => {
 
 const cacheFirst = async ({ request, preloadResponsePromise, fallbackUrl }) => {
   console.log('catch request', request)
-  // First try to get the resource from the cache
-  const responseFromCache = await caches.match(request);
-  if (responseFromCache) {
-    return responseFromCache;
-  }
 
   // Next try to use the preloaded response, if it's there
+  const preloadResponse = await preloadResponsePromise;
+  if (preloadResponse) {
+    console.info('using preload response', preloadResponse);
+    putInCache(request, preloadResponse.clone());
+    return preloadResponse;
+  }
 
   // Next try to get the resource from the network
   try {
@@ -31,11 +32,9 @@ const cacheFirst = async ({ request, preloadResponsePromise, fallbackUrl }) => {
     putInCache(request, responseFromNetwork.clone());
     return responseFromNetwork;
   } catch (error) {
-    const preloadResponse = await preloadResponsePromise;
-    if (preloadResponse) {
-      console.info('using preload response', preloadResponse);
-      putInCache(request, preloadResponse.clone());
-      return preloadResponse;
+    const responseFromCache = await caches.match(request);
+    if (responseFromCache) {
+      return responseFromCache;
     }
   }
 };
