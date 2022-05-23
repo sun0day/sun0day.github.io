@@ -11,23 +11,23 @@ const putInCache = async (request, response) => {
 const cacheFirst = async ({ request, preloadResponsePromise, fallbackUrl }) => {
   console.log('catch request', request)
 
-  // Next try to use the preloaded response, if it's there
-  const preloadResponse = await preloadResponsePromise;
-  if (preloadResponse) {
-    console.info('using preload response', preloadResponse);
-    putInCache(request, preloadResponse.clone());
-    return preloadResponse;
-  }
-
   // Next try to get the resource from the network
   try {
+    const preloadResponse = await preloadResponsePromise;
+    if (preloadResponse) {
+      console.info('using preload response', preloadResponse);
+      putInCache(request, preloadResponse.clone());
+      return preloadResponse;
+    }
     const responseFromNetwork = await fetch(request);
     // response may be used only once
     // we need to save clone to put one copy in cache
     // and serve second one
     putInCache(request, responseFromNetwork.clone());
+    console.info('using network fetch')
     return responseFromNetwork;
   } catch (error) {
+    console.log('using cache')
     const responseFromCache = await caches.match(request);
     if (responseFromCache) {
       return responseFromCache;
