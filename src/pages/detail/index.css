@@ -1,16 +1,17 @@
 .detail-container header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 20px;
   margin-bottom: 0;
   padding-top: 30px;
 }
 
-.detail-container header img:first-child {
+.detail-container header a img {
   width: 24px;
 }
 
-.detail-container header img:last-child {
+.detail-container header > img {
   width: 100px;
 }
 

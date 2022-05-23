@@ -1,15 +1,12 @@
 import { useEffect, useState } from 'react';
 import * as echarts from 'echarts'
-import { Button } from 'antd-mobile'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import logo from '../../assets/logo.svg'
-import home from '../../assets/home.svg'
-import moment from 'moment'
+import { Link } from 'react-router-dom';
 import leftArrow from '../../assets/left-arrow.svg'
 import precip from '../../assets/precip2.svg'
 import windSpeed from '../../assets/wind-speed2.svg'
 import humidity from '../../assets/humidity2.svg'
 import { getWeatherLogo } from '../../utils/weather';
+import {getDayZh} from '../../utils/date'
 import './index.css';
 
 function Detail() {
@@ -17,7 +14,7 @@ function Detail() {
   return (
     <div className="detail-container">
       <header>
-        <img src={leftArrow} />
+        <Link to='/'><img src={leftArrow} /></Link>
         <img src={getWeatherLogo()} />
       </header>
 
@@ -234,7 +231,7 @@ function DayList() {
     }
   ].map(w => (
       <div className='week-block' key={w.fxDate}>
-        <div className='time'>{['周日', '周一', '周二', '周三', '周四', '周五', '周六'][moment(w.fxDate).day()]}</div>
+        <div className='time'>{getDayZh(w.fxDate)}</div>
         <div className='text'>{w.textDay}</div>
         <div className='temp-list'>
           <span className='max-temp'>{w.tempMax}</span>

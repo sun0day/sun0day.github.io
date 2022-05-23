@@ -34,7 +34,6 @@
     |- public // html 所需静态资源
     |- pages // 页面模块
     |- utils // 工具函数
-    |- services // 三方服务接口
     |- App.js // 入口文件
  |- config // 打包配置
  |- scrips // 打包脚本

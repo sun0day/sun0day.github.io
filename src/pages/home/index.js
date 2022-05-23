@@ -1,5 +1,4 @@
-import { Button } from 'antd-mobile'
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { getWeatherLogo } from '../../utils/weather'
 import logo from '../../assets/logo.svg'
 import home from '../../assets/home.svg'
