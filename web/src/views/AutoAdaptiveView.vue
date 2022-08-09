@@ -78,6 +78,7 @@ h1 {
   padding-bottom: 14px;
   font-size: inherit;
   border-bottom: 1px solid #cfcfcf;
+  text-align: center;
 }
 
 .container {

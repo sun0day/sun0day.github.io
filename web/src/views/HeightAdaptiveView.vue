@@ -47,7 +47,7 @@ const list = ref(new Array(100).fill(0).map((x, i) => `item${i}`))
 }
 
 .container:first-of-type ul {
-  height: calc(100vh - 130px);
+  height: calc(100vh - 128px);
   background-color: bisque;
   color: blueviolet;
 }

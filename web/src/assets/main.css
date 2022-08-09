@@ -1,5 +1,4 @@
-@import "./base.css";
-
 body {
-  box-sizing: content-box;
+  box-sizing: border-box;
+  margin: 0;
 }
