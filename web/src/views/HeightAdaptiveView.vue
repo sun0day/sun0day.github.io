@@ -12,7 +12,7 @@ const list = ref(new Array(100).fill(0).map((x, i) => `item${i}`))
   </header>
     <ul>
       <li v-for="item in list">
-        {{ item }}
+        <!-- {{ item }} -->
       </li>
     </ul>
   <footer>
@@ -26,7 +26,7 @@ const list = ref(new Array(100).fill(0).map((x, i) => `item${i}`))
   </header>
     <ul>
       <li v-for="item in list">
-        {{ item }}
+        <!-- {{ item }} -->
       </li>
     </ul>
   <footer>
@@ -49,7 +49,10 @@ const list = ref(new Array(100).fill(0).map((x, i) => `item${i}`))
 .container:first-of-type ul {
   height: calc(100vh - 128px);
   background-color: bisque;
-  color: blueviolet;
+}
+
+.container:first-of-type ul li {
+   background: blueviolet;
 }
 
 .container:last-of-type {
@@ -68,9 +71,17 @@ const list = ref(new Array(100).fill(0).map((x, i) => `item${i}`))
 ul {
   width: 100%;
   margin: 0;
-  background-color: rebeccapurple;
-  color: bisque;
+  padding: 0px 100px;
+  background-color: blueviolet;
   overflow-y: auto;
+}
+
+ul li {
+  height: 20px;
+  opacity: 0.8;
+  margin-top: 10px;
+  list-style: none;
+  background-color: bisque;
 }
 
 header {

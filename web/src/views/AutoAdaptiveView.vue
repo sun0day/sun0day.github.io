@@ -89,7 +89,7 @@ h1 {
 .vw {
   display: inline-block;
   min-width: fit-content;
-  padding: 30px;
+  padding: 0 30px;
   border-radius: 10px;
   text-align: center;
 }
