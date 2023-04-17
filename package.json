@@ -5,7 +5,11 @@
     "docs:preview": "vitepress preview"
   },
   "devDependencies": {
+    "simple-git-hooks": "^2.8.1",
     "vitepress": "1.0.0-alpha.72",
     "vue": "^3.2.47"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm docs:build"
   }
 }
