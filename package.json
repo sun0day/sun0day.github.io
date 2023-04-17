@@ -5,11 +5,15 @@
     "docs:preview": "vitepress preview"
   },
   "devDependencies": {
+    "lint-staged": "^13.2.1",
     "simple-git-hooks": "^2.8.1",
     "vitepress": "1.0.0-alpha.72",
     "vue": "^3.2.47"
   },
+  "lint-staged": {
+    "*": "your-cmd"
+  },
   "simple-git-hooks": {
-    "pre-commit": "pnpm docs:build"
+    "pre-commit": "pnpm lint-staged"
   }
 }
