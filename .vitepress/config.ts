@@ -5,7 +5,7 @@ export default defineConfig({
   srcDir: './article',
   outDir: './blog',
   base: '/blog/',
-  title: "sun0day's blog",
+  title: "sun0day's blog - lost in code",
   description: "lost in code",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
