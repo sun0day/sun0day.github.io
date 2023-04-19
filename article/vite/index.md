@@ -2,4 +2,4 @@
 outline: deep
 ---
 
-### [Why Vite4.3 is faaaaster?](./why-vite4_3-is-faster.md)
+### [How did we make Vite 4.3 so faaaaster?](./why-vite4_3-is-faster.md)

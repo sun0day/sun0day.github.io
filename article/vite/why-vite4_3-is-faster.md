@@ -1,36 +1,41 @@
-# Why Vite4.3 is faaaaster?
+# How did we make Vite 4.3 so faaaaster? :rocket:
 
-Just like [@sapphi-red](https://github.com/sapphi-red/) said, Vite4.3 has made an amazing performance improvement than Vite4.2.
+Just like [@sapphi-red](https://github.com/sapphi-red/) said, Vite 4.3 has made amazing performance improvements over Vite 4.2.
 
 
 ![perf](https://user-images.githubusercontent.com/102238922/232652875-2fa5f9a9-17fa-48c8-b3de-4bdf87ae842f.png)
 
-As a new rookie of the team, I am so glad that I've joined this party. To let more people know what we did to make Vite4.3 so fast, we are happy to share the experience.
+As a new rookie on the team, I am so glad that I've joined this party. To let more people know what we did to make Vite 4.3 so fast, we are happy to share the experience.
 
 ## Smarter resolve strategy
 
-Vite resolves all the received urls and paths in order to get the target modules.
+Vite resolves all the received URLs and paths to get the target modules.
 
-In Vite4.2, there are many **redundant resolve logics and unnecessary module searches**. Vite4.3 makes the resolve logic **simpler**, **stricter** and **more accurate** to reduce calculations and `fs` calls.
+In Vite 4.2, there are many **redundant resolve logics and unnecessary module searches**. Vite 4.3 makes the resolve logic **simpler**, **stricter** and **more accurate** to reduce calculations and `fs` calls.
 
-### Resolve simpler
+### A simpler resolve
 
-Vite4.2 heavily depends on the [resolve](https://www.npmjs.com/package/resolve) package to resolve dependency's `package.json`, when we looked into the source code of [resolve](https://www.npmjs.com/package/resolve), there were many useless logic while resolving `package.json`. Vite4.3 abandons [resolve](https://www.npmjs.com/package/resolve) and follows the simpler resolve logic: directly check whether `package.json` exists in the nested parents' directory.
+Vite 4.2 heavily depends on the [resolve](https://www.npmjs.com/package/resolve) package to resolve the dependency's `package.json`, when we looked into the source code of [resolve](https://www.npmjs.com/package/resolve), there was much useless logic while resolving `package.json`. Vite 4.3 abandons [resolve](https://www.npmjs.com/package/resolve) and follows the simpler resolve logic: directly checks whether `package.json` exists in the nested parents' directory.
 
-### Resolve stricter
+### A stricter resolve
 
-Vite has to call the nodejs `fs` APIs to find the module. But IO is expensive. Vite4.3 narrows the file search and skips searching some special paths in order to reduce the `fs` calls as much as possible. e.g:
+Vite has to call the Nodejs `fs` APIs to find the module. But IO is expensive. Vite 4.3 narrows the file search and skips searching some special paths in order to reduce the `fs` calls as much as possible. e.g:
 
-1. Since `#` symbol would not appear in urls and users could control that no `#` symbol in the source files' paths, Vite4.3 no longer checks paths with `#` symbol inside user's own source files but only searches them in the `node_modules`.
-2. In unix systems, Vite4.2 checks each absolute path inside the root directory first, it's fine for most paths, but it would be very likely to fail if the absolute path starts with root. To skip searching `/root/root/path-to-file` while `/root/root` doesn't exist, Vite4.3 judges whether `/root/root` exists as a directory at the beginning and pre-caches the result.
-3. When Vite server receives `@fs/xxx` and `@vite/xxx`, it would be unnecessary to resolve this urls again. Vite4.3 directly returns the previous cached result instead re-resolving them.
-4. Vite4.2 uses absolute file paths as the package datas cache keys. That's not enough since Vite has to traverse the same directory both in `pkg/foo/bar` and  `pkg/foo/baz`. <br>Vite4.3 uses not only the absolute paths(`/root/node_modules/pkg/foo/bar.js` & `/root/node_modules/pkg/foo/baz.js`) but also the traversed directories(`/root/node_modules/pkg/foo` & `/root/node_modules/pkg`) as the keys of `pkg` cache.
+1. Since `#` symbol would not appear in URLs and users could control that no `#` symbol in the source files' paths, Vite 4.3 no longer checks paths with `#` symbol inside the user's source files but only searches them in the `node_modules`.
+2. In Unix systems, Vite 4.2 checks each absolute path inside the root directory first, it's fine for most paths, but it would be very likely to fail if the absolute path starts with the root. To skip searching `/root/root/path-to-file` while `/root/root` doesn't exist, Vite 4.3 judges whether `/root/root` exists as a directory at the beginning and pre-caches the result.
+3. When Vite server receives `@fs/xxx` and `@vite/xxx`, it would be unnecessary to resolve these URLs again. Vite 4.3 directly returns the previously cached result instead of re-resolving them.
 
-### Resolve more accurate
+### A more accurate resolve
 
-Vite4.2 recursively resolves the module when the file path is a directory, this would lead to unnecessary calculations repeatedly. Vite4.3 flattens the recursive resolution and applies appropriate resolution to different type paths. It's also easier to cache some `fs` calls after flattening.
+Vite 4.2 recursively resolves the module when the file path is a directory, this would lead to unnecessary calculations repeatedly. Vite 4.3 flattens the recursive resolution and applies appropriate resolution to different types of paths. It's also easier to cache some `fs` calls after flattening.
 
-Another case is that Vite4.2 looks up `package.json` of a deep import path inside a single function, e.g when Vite4.2 resolves a file path like `a/b/c/d`, it first checks whether root `a/package.json` exists, if not, then finds the nearest `package.json` in the order `a/b/c/package.json` -> `a/b/package.json`, but the fact is that finding root `package.json` and nearest `package.json` should be handled separately since they are needed in different resolve contexts. Vite4.3 splits the root `package.json` and nearest `package.json` resolution in two parts so that they won't mix with each other.
+### Package package package
+
+Thanks to [@bluwy](https://github.com/bluwy)'s nice work, Vite 4.3 breaks the performance bottleneck of resolving `node_modules` package data.
+
+Vite 4.2 uses absolute file paths as the package data cache keys. That's not enough since Vite has to traverse the same directory both in `pkg/foo/bar` and `pkg/foo/baz`. <br>Vite 4.3 uses not only the absolute paths(`/root/node_modules/pkg/foo/bar.js` & `/root/node_modules/pkg/foo/baz.js`) but also the traversed directories(`/root/node_modules/pkg/foo` & `/root/node_modules/pkg`) as the keys of `pkg` cache.
+
+Another case is that Vite 4.2 looks up `package.json` of a deep import path inside a single function, e.g when Vite 4.2 resolves a file path like `a/b/c/d`, it first checks whether root `a/package.json` exists, if not, then finds the nearest `package.json` in the order `a/b/c/package.json` -> `a/b/package.json`, but the fact is that finding root `package.json` and nearest `package.json` should be handled separately since they are needed in different resolve contexts. Vite 4.3 splits the root `package.json` and nearest `package.json` resolution in two parts so that they won't mix.
 
 ## Non-blocking tasks
 
@@ -40,58 +45,58 @@ As an on-demand service, Vite dev server can be started without all the stuff be
 
 Vite server needs `tsconfig` data when pre-bundling `ts` or `tsx`. 
 
-Vite4.2 waits `tsconfig` data being parsed in the plugin hook `configResolved` before server starts up. In fact, page request could visit the server once server starts up without `tsconfig` data is ready even though the request might need to wait the `tsconfig` parsing later.
+Vite 4.2 waits for `tsconfig` data to be parsed in the plugin hook `configResolved` before the server starts up. Page requests could visit the server once the server starts up without `tsconfig` data ready even though the request might need to wait for the `tsconfig` parsing later.
 
-Vite4.3 inits `tsconfig` parsing before server starts up, but the server won't wait for it. The parsing process runs in the background. Once a `ts`-related request comes in, it will have to wait until the `tsconfig` parsing finished.
+Vite 4.3 inits `tsconfig` parsing before the server starts up, but the server won't wait for it. The parsing process runs in the background. Once a `ts`-related request comes in, it will have to wait until the `tsconfig` parsing is finished.
 
 ### Non-blocking file processing
 
-There are plenty of `fs` calls in Vite, some of them are synchronous. These synchronous `fs` calls may block the main thread. Vite4.3 changes them to asynchronous. Also it's easier to parallelize the asynchronous functions. One thing about asynchronous functions you should care about is that there might be many `Promise` objects to be released after they are resolved. Thanks to the smarter resolve strategy, the cost of releasing `fs`-`Promise` objects is much less.
+There are plenty of `fs` calls in Vite, and some of them are synchronous. These synchronous `fs` calls may block the main thread. Vite 4.3 changes them to asynchronous. Also, it's easier to parallelize the asynchronous functions. One thing about asynchronous functions you should care about is that there might be many `Promise` objects to be released after they are resolved. Thanks to the smarter resolve strategy, the cost of releasing `fs`-`Promise` objects is much less.
 
 ## HMR cache
 
-Consider a simple dependency chain `root <- B <- A`, when `A` is edited, HMR will propagate from `A` to `root`. Most of the time, users edit single file once a time. In some special cases like `git checkout branch`, there might be plenty of files change at the same time, this will cause duplicate HMR propagation from `B` to `root`. In Vite4.3, we cache the files in each HMR propagation chain so that they could be skipped in other HMR propagation chains.
+Consider a simple dependency chain `root <- B <- A`, when `A` is edited, HMR will propagate from `A` to `root`. Most of the time, users edit single file once a time. In some special cases like `git checkout branch`, there might be plenty of files change at the same time, this will cause duplicate HMR propagation from `B` to `root`. In Vite 4.3, we cache the files in each HMR propagation chain so that they could be skipped in other HMR propagation chains.
 
 ## Parallelization
 
-Parallelization is always a good choice for better performance. In Vite4.3, we parallelized some core features includes [imports analysis](https://github.com/vitejs/vite/pull/12754/files), [extract deps' exports](https://github.com/vitejs/vite/pull/12869/files), [resolve module urls](https://github.com/vitejs/vite/pull/12619/files) and [run bulk optimizers](https://github.com/vitejs/vite/pull/12609/files). There is indeed an impressive improvement after parallelization.
+Parallelization is always a good choice for better performance. In Vite 4.3, we parallelized some core features includes [imports analysis](https://github.com/vitejs/vite/pull/12754/files), [extract deps' exports](https://github.com/vitejs/vite/pull/12869/files), [resolve module urls](https://github.com/vitejs/vite/pull/12619/files) and [run bulk optimizers](https://github.com/vitejs/vite/pull/12609/files). There is indeed an impressive improvement after parallelization.
 
 ## Javascript optimization
 
-Do not miss programming language optimization. Some interesting javascript optimization cases in Vite4.3:
+Do not miss programming language optimization. Some interesting javascript optimization cases in Vite 4.3:
 
 ### Substitute `*yield` with callback
 
-Vite uses [tsconfck](https://github.com/dominikg/tsconfck)(by [@dominikg](https://github.com/dominikg)) to find and parse `tsconfig` files. [tsconfck](https://github.com/dominikg/tsconfck) used to walk the target directory via `*yield`, one disadvantage of generator is that it needs more memory spaces to store its `Generator` object and there would be plenty of generator context switches in the runtime. So [@dominikg](https://github.com/dominikg) substituted `*yield` with callback in the core since v2.1.1.
+Vite uses [tsconfck](https://github.com/dominikg/tsconfck)(by [@dominikg](https://github.com/dominikg)) to find and parse `tsconfig` files. [tsconfck](https://github.com/dominikg/tsconfck) used to walk the target directory via `*yield`, one disadvantage of the generator is that it needs more memory spaces to store its `Generator` object and there would be plenty of generator context switches in the runtime. So [@dominikg](https://github.com/dominikg) substituted `*yield` with callback in the core since v2.1.1.
 
 Check more details [here](https://github.com/dominikg/tsconfck/pull/84/files).
 
 ### Substitute `startsWith` & `endsWith` with `===`
 
-We also noticed that Vite4.2 uses `startsWith` and `endsWith` to check the heading and trailing `'/'` in hot urls. We compared `str.startsWith('x')`'s and `str[0] === 'x'`'s execution benchmarks and found `===` was about ~20% faster than `startsWith`. And `endsWith` was about ~60% slower than `===` in the meantime.
+We also noticed that Vite 4.2 uses `startsWith` and `endsWith` to check the heading and trailing `'/'` in hot URLs. We compared `str.startsWith('x')`'s and `str[0] === 'x'`'s execution benchmarks and found `===` was about ~20% faster than `startsWith`. And `endsWith` was about ~60% slower than `===` in the meantime.
 
 ### Avoid recreating regular expression
 
-Vite needs a lot of regular expressions to match strings, most of them are static, it would be much better to only use their singletons. Vite4.3 hoists regular expressions so they could be reused.
+Vite needs a lot of regular expressions to match strings, most of them are static, so it would be much better to only use their singletons. Vite 4.3 hoists regular expressions so they could be reused.
 
 ## Inch by inch
 
 > Rome wasn't built in a day
 
-So was Vite4.3.
+So was Vite 4.3.
 
-We put a lot of big or small efforts to optimize the performance as much as possible. And finally we made it!
+We put a lot of big or small efforts to optimize the performance as much as possible. And finally, we made it!
 
-This article shows the main ideas about how we optimize Vite4.3. If you are interesting in more of what we did, see [CHANGELOG](https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md) here.
+This article shows the main ideas about how we optimize Vite 4.3. If you are interested in more of what we did, see [CHANGELOG](https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md) here.
 
-**Looking forward to sharing with us your Vite4.3 stories.**
+**Looking forward to sharing with us your Vite 4.3 stories.**
 
 
 ## Benchmark ecosystem
 
-- [vite-benchmark](https://github.com/vitejs/vite-benchmark)(by [@fi3ework](https://github.com/fi3ework)): vite uses this repo to test every commit's benchmark, if you are developing a large project with vite, we are happy to test your repo for a more comprehensively performance.
-- [vite-plugin-inspect](https://github.com/antfu/vite-plugin-inspect)(by [@antfu](https://github.com/antfu)): vite-plugin-inspect supports to show the plugins' hook time since v0.7.20, and there will be more benchmark graphs in the future, let us know what you need.
-- [vite-plugin-warmup](https://github.com/bluwy/vite-plugin-warmup)(by [@bluwy](https://github.com/bluwy)): warm up your vite server, speed up the page loading!
+- [vite-benchmark](https://github.com/vitejs/vite-benchmark)(by [@fi3ework](https://github.com/fi3ework)): vite uses this repo to test every commit's benchmark, if you are developing a large project with vite, we are happy to test your repo for more comprehensive performance.
+- [vite-plugin-inspect](https://github.com/antfu/vite-plugin-inspect)(by [@antfu](https://github.com/antfu)): vite-plugin-inspect supports showing the plugins' hook time since v0.7.20, and there will be more benchmark graphs in the future, let us know what you need.
+- [vite-plugin-warmup](https://github.com/bluwy/vite-plugin-warmup)(by [@bluwy](https://github.com/bluwy)): warm up your Vite server, and speed up the page loading!
 
 
 
