@@ -14,7 +14,8 @@ export default defineConfig({
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/sun0day' }
+      { icon: 'github', link: 'https://github.com/sun0day' },
+      { icon: 'twitter', link: 'https://twitter.com/sun0day500' },
     ]
   }
 })
