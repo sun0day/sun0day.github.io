@@ -1,4 +1,4 @@
-# How did we make Vite 4.3 so faaaaster? :rocket:
+# How did we make Vite 4.3 faaaaster? :rocket:
 
 Just like [@sapphi-red](https://github.com/sapphi-red/) said, Vite 4.3 has made amazing performance improvements over Vite 4.2.
 
