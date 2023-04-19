@@ -1,1 +1,0 @@
-import{_ as e,o as t,c as a}from"./chunks/framework.63d7691c.js";const f=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"vite/why-vite4_3-is-faster.md"}'),s={name:"vite/why-vite4_3-is-faster.md"};function r(o,i,c,n,_,p){return t(),a("div")}const m=e(s,[["render",r]]);export{f as __pageData,m as default};

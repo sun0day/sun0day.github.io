@@ -38,11 +38,15 @@ As an on-demand service, Vite dev server can be started without all the stuff be
 
 ### Non-blocking `tsconfig` parsing
 
-Vite server needs `tsconfig` data when pre-bundling `ts` or `tsx`. Vite4.2 waits `tsconfig` data being resolved in the plugin hook `configResolved`, this might increase the server start up time. 
+Vite server needs `tsconfig` data when pre-bundling `ts` or `tsx`. 
 
-### Delay optimizer 
+Vite4.2 waits `tsconfig` data being parsed in the plugin hook `configResolved` before server starts up. In fact, page request could visit the server once server starts up without `tsconfig` data is ready even though the request might need to wait the `tsconfig` parsing later.
+
+Vite4.3 inits `tsconfig` parsing before server starts up, but the server won't wait for it. The parsing process runs in the background. Once a `ts`-related request comes in, it will have to wait until the `tsconfig` parsing finished.
 
 ### Non-blocking file processing
+
+There are plenty of `fs` calls in Vite, some of them are synchronous. These synchronous `fs` calls may block the main thread. Vite4.3 changes them to asynchronous. Also it's easier to parallelize the asynchronous functions. One thing about asynchronous functions you should care about is that there might be many `Promise` objects to be released after they are resolved. Thanks to the smarter resolve strategy, the cost of releasing `fs`-`Promise` objects is much less.
 
 ## HMR cache
 
@@ -50,7 +54,7 @@ Consider a simple dependency chain `root <- B <- A`, when `A` is edited, HMR wil
 
 ## Parallelization
 
-Parallelization is always a good choice for better performance. In Vite4.3, we parallelized [imports analysis](https://github.com/vitejs/vite/pull/12754/files), [extract deps' exports](https://github.com/vitejs/vite/pull/12869/files) and [resolve module urls](https://github.com/vitejs/vite/pull/12619/files).
+Parallelization is always a good choice for better performance. In Vite4.3, we parallelized some core features includes [imports analysis](https://github.com/vitejs/vite/pull/12754/files), [extract deps' exports](https://github.com/vitejs/vite/pull/12869/files), [resolve module urls](https://github.com/vitejs/vite/pull/12619/files) and [run bulk optimizers](https://github.com/vitejs/vite/pull/12609/files). There is indeed an impressive improvement after parallelization.
 
 ## Javascript optimization
 
@@ -76,9 +80,9 @@ Vite needs a lot of regular expressions to match strings, most of them are stati
 
 So was Vite4.3.
 
-We made a lot of big or small efforts to optimize the performance as much as possible. Finally we made it!
+We put a lot of big or small efforts to optimize the performance as much as possible. And finally we made it!
 
-If you are interesting in more of what we did, see [CHANGELOG](https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md) here.
+This article shows the main ideas about how we optimize Vite4.3. If you are interesting in more of what we did, see [CHANGELOG](https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md) here.
 
 **Looking forward to sharing with us your Vite4.3 stories.**
 
