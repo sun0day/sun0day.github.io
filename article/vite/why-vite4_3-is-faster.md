@@ -67,7 +67,7 @@ There are plenty of `fs` calls in Vite, and some of them are synchronous. These 
 
 Consider two simple dependency chains `C <- B <- A` & `D <- B <- A`, when `A` is edited, HMR will propagate both from `A` to `C` and `A` to `D`. This leads to `A` and `B` being updated twice in Vite 4.2.
 
-Vite 4.3 caches these traversed modules to avoid exploring them multiple times. This could have a big impact on those file structures with components barrel importing. It's also good for HMR triggered by `git checkout`
+Vite 4.3 caches these traversed modules to avoid exploring them multiple times. This could have a big impact on those file structures with components barrel importing. It's also good for HMR triggered by `git checkout`.
 
 ## Parallelization
 
