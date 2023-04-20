@@ -15,7 +15,7 @@ In Vite 4.2, there are many **redundant resolve logics and unnecessary module se
 
 ### A simpler resolve
 
-Vite 4.2 heavily depends on the [resolve](https://www.npmjs.com/package/resolve) package to resolve the dependency's `package.json`, when we looked into the source code of [resolve](https://www.npmjs.com/package/resolve), there was much useless logic while resolving `package.json`. Vite 4.3 abandons [resolve](https://www.npmjs.com/package/resolve) and follows the simpler resolve logic: directly checks whether `package.json` exists in the nested parents' directory.
+Vite 4.2 heavily depends on the [resolve](https://www.npmjs.com/package/resolve) package to resolve the dependency's `package.json`, when we looked into the source code of [resolve](https://www.npmjs.com/package/resolve), there was much useless logic while resolving `package.json`. Vite 4.3 abandons [resolve](https://www.npmjs.com/package/resolve) and follows the simpler resolve logic: directly checks whether `package.json` exists in the nested parents' directories.
 
 ### A stricter resolve
 
@@ -37,6 +37,16 @@ Vite 4.2 uses absolute file paths as the package data cache keys. That's not eno
 
 Another case is that Vite 4.2 looks up `package.json` of a deep import path inside a single function, e.g when Vite 4.2 resolves a file path like `a/b/c/d`, it first checks whether root `a/package.json` exists, if not, then finds the nearest `package.json` in the order `a/b/c/package.json` -> `a/b/package.json`, but the fact is that finding root `package.json` and nearest `package.json` should be handled separately since they are needed in different resolve contexts. Vite 4.3 splits the root `package.json` and nearest `package.json` resolution in two parts so that they won't mix.
 
+## `fs` issue
+
+There was an interesting [`realpathSync` issue](https://github.com/nodejs/node/issues/2680) in Nodejs, it pointed out that `fs.realpathSync` is 70x slower than `fs.realpathSync.native`. 
+
+But Vite 4.2 only uses `fs.realpathSync.native` on non-Windows systems due to its [different behavior on Windows](https://github.com/nodejs/node/issues/37737). To fix that, Vite 4.3 adds a network drive validation when calling `fs.realpathSync.native` on Windows.
+
+You can check more details [here](https://github.com/vitejs/vite/pull/12580).
+
+> Vite never gives up on Windows :fire:
+
 ## Non-blocking tasks
 
 As an on-demand service, Vite dev server can be started without all the stuff being ready.
@@ -53,9 +63,9 @@ Vite 4.3 inits `tsconfig` parsing before the server starts up, but the server wo
 
 There are plenty of `fs` calls in Vite, and some of them are synchronous. These synchronous `fs` calls may block the main thread. Vite 4.3 changes them to asynchronous. Also, it's easier to parallelize the asynchronous functions. One thing about asynchronous functions you should care about is that there might be many `Promise` objects to be released after they are resolved. Thanks to the smarter resolve strategy, the cost of releasing `fs`-`Promise` objects is much less.
 
-## HMR cache
+## HMR debouncing
 
-Consider a simple dependency chain `root <- B <- A`, when `A` is edited, HMR will propagate from `A` to `root`. Most of the time, users edit single file once a time. In some special cases like `git checkout branch`, there might be plenty of files change at the same time, this will cause duplicate HMR propagation from `B` to `root`. In Vite 4.3, we cache the files in each HMR propagation chain so that they could be skipped in other HMR propagation chains.
+Consider a simple dependency chain `root <- B <- A`, when `A` is edited, HMR will propagate from `A` to `root`. Most of the time, users edit a single file once at a time. In some special cases like `git checkout branch`, there might be plenty of files changed at the same time, this will cause duplicate HMR propagation from `B` to `root`. In Vite 4.3, we cache the files in each HMR propagation chain so that they could be skipped in other HMR propagation chains.
 
 ## Parallelization
 
