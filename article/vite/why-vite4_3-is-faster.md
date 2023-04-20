@@ -2,10 +2,10 @@
 
 Just like [@sapphi-red](https://github.com/sapphi-red/) said, Vite 4.3 has made [amazing performance improvements](https://gist.github.com/sapphi-red/25be97327ee64a3c1dce793444afdf6e) over Vite 4.2.
 
-![](https://pbs.twimg.com/media/FtLzmKAaMAAcxNv?format=png&name=small)
-![](https://pbs.twimg.com/media/FtLzofgaMAEx-nk?format=png&name=small)
-![](https://pbs.twimg.com/media/FuDMe55aMAAY2tm?format=png&name=small)
-![](https://pbs.twimg.com/media/FuDMkFsagAIHfEt?format=png&name=small)
+![](./vite4_3-startup.png)
+![](./vite4_3-hmr.png)
+![](./vite4_3-compare-startup.png)
+![](./vite4_3-compare-hmr.png)
 
 As a new rookie on the team, I am so glad that I've joined this party. To let more people know what we did to make Vite 4.3 so fast, we are happy to share the experience.
 
