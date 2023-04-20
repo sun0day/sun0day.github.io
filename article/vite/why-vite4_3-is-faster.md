@@ -1,3 +1,29 @@
+---
+sidebar: false
+head:
+  - - meta
+    - property: og:type
+      content: website
+  - - meta
+    - property: og:title
+      content: How we made Vite 4.3 faaaaster
+  - - meta
+    - property: og:image
+      content: https://user-images.githubusercontent.com/102238922/233404924-2ad437dc-ff93-40fe-b9c6-53f9197f25b9.png
+  - - meta
+    - property: twitter:image:src
+      content: https://user-images.githubusercontent.com/102238922/233404924-2ad437dc-ff93-40fe-b9c6-53f9197f25b9.png
+  - - meta
+    - property: og:url
+      content: https://sun0day.github.io/blog/vite/why-vite4_3-is-faster.html
+  - - meta
+    - property: og:description
+      content: Just like @sapphi-red said, Vite 4.3 has made amazing performance improvements over Vite 4.2
+  - - meta
+    - name: twitter:card
+      content: summary_large_image
+---
+
 # How we made Vite 4.3 faaaaster :rocket:
 
 Just like [@sapphi-red](https://github.com/sapphi-red/) said, Vite 4.3 has made [amazing performance improvements](https://gist.github.com/sapphi-red/25be97327ee64a3c1dce793444afdf6e) over Vite 4.2.
