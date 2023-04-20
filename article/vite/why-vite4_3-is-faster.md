@@ -1,6 +1,9 @@
 # How we made Vite 4.3 faaaaster :rocket:
 
-Just like [@sapphi-red](https://github.com/sapphi-red/) said, Vite 4.3 has made [amazing performance improvements](https://gist.github.com/sapphi-red/25be97327ee64a3c1dce793444afdf6e) over Vite 4.2.
+Just like [@sapphi-red](https://github.com/sapphi-red/) said below, Vite 4.3 has made [amazing performance improvements](https://gist.github.com/sapphi-red/25be97327ee64a3c1dce793444afdf6e) over Vite 4.2.
+
+> I took some benchmarks with Vite 4.3 beta on my Windows machine.
+Vite 4.3's cold start time is 3 times faster and also the hot start time is 1.3 times faster🏎. What's more, Vite 4.3's cold start time is now 1.5s faster than turbopack when using SWC plugin.😮
 
 ![](./vite4_3-startup.png)
 ![](./vite4_3-hmr.png)
