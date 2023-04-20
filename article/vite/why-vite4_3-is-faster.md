@@ -1,9 +1,11 @@
 # How we made Vite 4.3 faaaaster :rocket:
 
-Just like [@sapphi-red](https://github.com/sapphi-red/) said, Vite 4.3 has made amazing performance improvements over Vite 4.2.
+Just like [@sapphi-red](https://github.com/sapphi-red/) said, Vite 4.3 has made [amazing performance improvements](https://gist.github.com/sapphi-red/25be97327ee64a3c1dce793444afdf6e) over Vite 4.2.
 
-
-![perf](https://user-images.githubusercontent.com/102238922/232652875-2fa5f9a9-17fa-48c8-b3de-4bdf87ae842f.png)
+![](https://pbs.twimg.com/media/FtLzmKAaMAAcxNv?format=png&name=small)
+![](https://pbs.twimg.com/media/FtLzofgaMAEx-nk?format=png&name=small)
+![](https://pbs.twimg.com/media/FuDMe55aMAAY2tm?format=png&name=small)
+![](https://pbs.twimg.com/media/FuDMkFsagAIHfEt?format=png&name=small)
 
 As a new rookie on the team, I am so glad that I've joined this party. To let more people know what we did to make Vite 4.3 so fast, we are happy to share the experience.
 
@@ -90,6 +92,10 @@ We also noticed that Vite 4.2 uses `startsWith` and `endsWith` to check the head
 ### Avoid recreating regular expression
 
 Vite needs a lot of regular expressions to match strings, most of them are static, so it would be much better to only use their singletons. Vite 4.3 hoists regular expressions so they could be reused.
+
+### Abandon generating custom error
+
+There are some custom errors for better DX in Vite 4.2. Those errors might lead to extra calculation and garbage collection which would slow down Vite. In Vite 4.3, we have to abandon generating some hot custom errors(e.g `package.json` `NOT_FOUND` error) and directly throw the original ones for better performance.
 
 ## Inch by inch
 
