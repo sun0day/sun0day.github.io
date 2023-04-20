@@ -106,7 +106,7 @@ This article shows the main ideas about how we optimize Vite 4.3. If you are int
 
 ## Benchmark ecosystem
 
-- [vite-benchmark](https://github.com/vitejs/vite-benchmark)(by [@fi3ework](https://github.com/fi3ework)): vite uses this repo to test every commit's benchmark, if you are developing a large project with vite, we are happy to test your repo for more comprehensive performance.
+- [vite-benchmark](https://github.com/vitejs/vite-benchmark)(by [@fi3ework](https://github.com/fi3ework)): Vite uses this repo to test every commit's benchmark, if you are developing a large project with Vite, we are happy to test your repo for more comprehensive performance.
 - [vite-plugin-inspect](https://github.com/antfu/vite-plugin-inspect)(by [@antfu](https://github.com/antfu)): vite-plugin-inspect supports showing the plugins' hook time since v0.7.20, and there will be more benchmark graphs in the future, let us know what you need.
 - [vite-plugin-warmup](https://github.com/bluwy/vite-plugin-warmup)(by [@bluwy](https://github.com/bluwy)): warm up your Vite server, and speed up the page loading!
 
