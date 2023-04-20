@@ -37,7 +37,7 @@ Vite 4.2 uses absolute file paths as the package data cache keys. That's not eno
 
 Another case is that Vite 4.2 looks up `package.json` of a deep import path inside a single function, e.g when Vite 4.2 resolves a file path like `a/b/c/d`, it first checks whether root `a/package.json` exists, if not, then finds the nearest `package.json` in the order `a/b/c/package.json` -> `a/b/package.json`, but the fact is that finding root `package.json` and nearest `package.json` should be handled separately since they are needed in different resolve contexts. Vite 4.3 splits the root `package.json` and nearest `package.json` resolution in two parts so that they won't mix.
 
-## `fs` issue
+## `fs.realpathSync` issue
 
 There was an interesting [`realpathSync` issue](https://github.com/nodejs/node/issues/2680) in Nodejs, it pointed out that `fs.realpathSync` is 70x slower than `fs.realpathSync.native`. 
 
@@ -65,7 +65,9 @@ There are plenty of `fs` calls in Vite, and some of them are synchronous. These 
 
 ## HMR debouncing
 
-Consider a simple dependency chain `root <- B <- A`, when `A` is edited, HMR will propagate from `A` to `root`. Most of the time, users edit a single file once at a time. In some special cases like `git checkout branch`, there might be plenty of files changed at the same time, this will cause duplicate HMR propagation from `B` to `root`. In Vite 4.3, we cache the files in each HMR propagation chain so that they could be skipped in other HMR propagation chains.
+Consider two simple dependency chains `C <- B <- A` & `D <- B <- A`, when `A` is edited, HMR will propagate both from `A` to `C` and `A` to `D`. This leads to `A` and `B` being updated twice in Vite 4.2.
+
+Vite 4.3 caches these traversed modules to avoid exploring them multiple times. This could have a big impact on those file structures with components barrel importing. It's also good for HMR triggered by `git checkout`
 
 ## Parallelization
 
