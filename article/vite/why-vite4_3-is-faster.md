@@ -1,14 +1,11 @@
 # How we made Vite 4.3 faaaaster :rocket:
 
-Just like [@sapphi-red](https://github.com/sapphi-red/) said below, Vite 4.3 has made [amazing performance improvements](https://gist.github.com/sapphi-red/25be97327ee64a3c1dce793444afdf6e) over Vite 4.2.
-
-> I took some benchmarks with Vite 4.3 beta on my Windows machine.
-Vite 4.3's cold start time is 3 times faster and also the hot start time is 1.3 times faster🏎. What's more, Vite 4.3's cold start time is now 1.5s faster than turbopack when using SWC plugin.😮
+Just like [@sapphi-red](https://github.com/sapphi-red/) said, Vite 4.3 has made [amazing performance improvements](https://gist.github.com/sapphi-red/25be97327ee64a3c1dce793444afdf6e) over Vite 4.2.
 
 ![](./vite4_3-startup.png)
 ![](./vite4_3-hmr.png)
-![](./vite4_3-compare-startup.png)
-![](./vite4_3-compare-hmr.png)
+
+> These benchmarks based on a large project with 1000 react components. And these react components were transformed by [vite-plugin-react](https://github.com/vitejs/vite-plugin-react) and [vite-plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc).
 
 As a new rookie on the team, I am so glad that I've joined this party. To let more people know what we did to make Vite 4.3 so fast, we are happy to share the experience.
 
