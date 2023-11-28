@@ -1,0 +1,1 @@
+import{_ as a,o as e,c as t,O as i}from"./chunks/framework.63d7691c.js";const m=JSON.parse('{"title":"Happy writing, happy coding","description":"","frontmatter":{"outline":"deep"},"headers":[],"relativePath":"index.md"}'),r={name:"index.md"},o=i("",3),n=[o];function d(s,h,p,_,c,l){return e(),t("div",null,n)}const w=a(r,[["render",d]]);export{m as __pageData,w as default};

@@ -89,3 +89,6 @@
   --docsearch-primary-color: var(--vp-c-brand) !important;
 }
 
+body {
+  font-family: var(--vp-font-family-mono);
+}
