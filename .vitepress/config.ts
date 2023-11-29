@@ -7,6 +7,9 @@ export default defineConfig({
   base: '/blog/',
   title: "sun0day - lost in code",
   description: "lost in code",
+  head: [
+    ['link', { rel: 'shortcut icon', type: 'image/x-icon', href: '/favicon.ico' }],
+  ],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     // nav: [
