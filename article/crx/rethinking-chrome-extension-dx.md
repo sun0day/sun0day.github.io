@@ -9,10 +9,10 @@ head:
       content: Rethinking Chrome Extension DX
   - - meta
     - property: og:image
-      content: https://github.com/sun0day/happy-chrome-extension/assets/102238922/44991d2b-8457-4e01-87f2-55c449d5c11f
+      content: https://github.com/sun0day/happy-chrome-extension/assets/102238922/19d5ffe0-2147-4518-97b1-362dff19dba0
   - - meta
     - property: twitter:image:src
-      content: https://github.com/sun0day/happy-chrome-extension/assets/102238922/44991d2b-8457-4e01-87f2-55c449d5c11f
+      content: https://github.com/sun0day/happy-chrome-extension/assets/102238922/19d5ffe0-2147-4518-97b1-362dff19dba0
   - - meta
     - property: og:url
       content: https://sun0day.github.io/blog/crx/rethinking-chrome-extension-dx.html
