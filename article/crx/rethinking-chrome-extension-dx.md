@@ -9,16 +9,16 @@ head:
       content: Rethinking Chrome Extension DX
   - - meta
     - property: og:image
-      content: https://user-images.githubusercontent.com/102238922/233404924-2ad437dc-ff93-40fe-b9c6-53f9197f25b9.png
+      content: https://github.com/sun0day/happy-chrome-extension/assets/102238922/44991d2b-8457-4e01-87f2-55c449d5c11f
   - - meta
     - property: twitter:image:src
-      content: https://user-images.githubusercontent.com/102238922/233404924-2ad437dc-ff93-40fe-b9c6-53f9197f25b9.png
+      content: https://github.com/sun0day/happy-chrome-extension/assets/102238922/44991d2b-8457-4e01-87f2-55c449d5c11f
   - - meta
     - property: og:url
       content: https://sun0day.github.io/blog/crx/rethinking-chrome-extension-dx.html
   - - meta
     - property: og:description
-      content: Just like @sapphi-red said, Vite 4.3 has made amazing performance improvements over Vite 4.2
+      content: This article discussed some issues on how to improve the Chrome extension DX
   - - meta
     - name: twitter:card
       content: summary_large_image
@@ -148,9 +148,31 @@ We can turn on the ESLint [`env.webextensions`](https://eslint.org/docs/latest/u
 ```
 
 
-Preseting native APIs in ESLint is not enough, we still need more rules to help us find some potential runtime errors.
+Preseting native APIs in ESLint is not enough, we still need more rules to help us find some potential runtime errors. Here are some rules that would help write robust codes.
+
+### `no-permission`
+
+When we use a native API, we must declare its [permission](https://developer.chrome.com/docs/extensions/reference/permissions-list) in the `manifest.json` first, otherwise, an error will occur when the extension calls this API. To avoid this error during runtime, we can detect it when coding via ESLint.
+
+### `version-mismatch`
+
+Since manifest V3 is supported generally in Chrome 88 or later, APIs of manifest V2 will be deprecated or refactored gradually. If we use V2 APIs in the V3 context, `version-mismatch` rule will prompt an ESLint error directly.
+
+### `no-unavailable-api`
+
+Different contexts have different accessibilities to native APIs. For example, as the [document](https://developer.chrome.com/docs/extensions/develop/concepts/content-scripts#capabilities) says, we can only use partial native APIs in content scripts. This type of error can be confusing for extension newbie developers, they have to Google it or review the extension document to find out why the native API is `undefined`.
+
+### `no-unhandled-message`
+
+When the extension becomes more and more complex, we need to make sure both senders and receivers handle the messages correctly. `no-unhandled-message` rule will detect whether a message has a handler set on the receiver side in case the message is not handled properly.
+
+By adding those and more rules, we can write robust codes more easily.
 
 ## Extension Starter
+
+The final issue I am gonna talk about is the extension starter. A starter is a tool that can quickly initialize an extension app and manage its project development. A good starter can be flexible for different extension components, scripts, languages and UI frameworks while keeping stable for the bottom bundler, package manager and CI/CD. We can learn that from [`Vite`](https://vitejs.dev/) and integrate the powers mentioned above into it.
+
+![create-vite](./create-vite.jpg)
 
 ## Conclusion
 
