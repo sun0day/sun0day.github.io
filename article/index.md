@@ -6,7 +6,7 @@ outline: deep
 
 ## 2024-02
 
-### [Rethink Chrome Extension DX](./crx/rethink-chrome-extension-dx.md)
+### [Rethinking Chrome Extension DX](./crx/rethinking-chrome-extension-dx.md)
 
 ## 2023-04
 
