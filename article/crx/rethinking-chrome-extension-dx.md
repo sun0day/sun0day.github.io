@@ -1,5 +1,6 @@
 ---
 sidebar: false
+description: This article discussed some issues on how to improve the Chrome extension DX
 head:
   - - meta
     - property: og:type
