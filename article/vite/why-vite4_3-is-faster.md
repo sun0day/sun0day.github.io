@@ -3,7 +3,7 @@ sidebar: false
 head:
   - - meta
     - property: og:type
-      content: website
+      content: article
   - - meta
     - property: og:title
       content: How we made Vite 4.3 faaaaster

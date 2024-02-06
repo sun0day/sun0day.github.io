@@ -3,8 +3,11 @@ sidebar: false
 description: This article discussed some issues on how to improve the Chrome extension DX
 head:
   - - meta
+    - property: keywords
+      content: Chrome, engineering, frontend
+  - - meta
     - property: og:type
-      content: website
+      content: article
   - - meta
     - property: og:title
       content: Rethinking Chrome Extension DX
